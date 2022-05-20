@@ -1,0 +1,35 @@
+<html>   
+    <head>
+      <title>My New Webpage</title>
+      <style>
+       li {
+           color: red;
+           line-height: 2;
+       }
+   </style>
+  </head>
+    
+{% regroup this_maker by maker.name as type_items %}
+{% for x in type_items %}
+    <h1>{{ x.grouper }}</h1>
+    {% for w in x.list %}
+    <li style=><a href="/wines/{{ w.id }}/">
+        {{ w.wine_type }} |
+            {{ w.blend }} | 
+            {{ w.year }} | 
+            {{ w.maker.name }} | 
+            {{ w.region }} | 
+        {{ w.appellation }} | 
+            {{ w.where.room }}
+            </a></li>
+    
+{% endfor %}
+{% endfor %}
+    
+   
+
+
+
+    
+</html>
+    

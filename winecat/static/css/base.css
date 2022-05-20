@@ -1,0 +1,11 @@
+h1, h2 {
+    color: #C25100;
+    text-align: center;
+    font: normal 1.5em/1.1 OFL Sorts Mill Goudy, Noto Nastaliq Urdu, My Noto Nastaliq Urdu, Georgia, serif;
+}
+body {
+  font-family: Lato;
+  margin: 25px;
+  font-size: 1em;
+}
+

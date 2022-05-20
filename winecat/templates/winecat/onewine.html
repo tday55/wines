@@ -1,0 +1,33 @@
+<html>   
+    <head>
+      <title>My New Webpage</title>
+      <style>
+       li {
+           color: red;
+           line-height: 2;
+       }
+   </style>
+  </head>
+    
+{% for w in this_wine %}
+    <h1><a href="/wines/makers/{{ w.maker.id }}">{{ w.maker.name }}</a></h1>
+    <p>{{ w.wine_type }}</p>
+    <ol>
+        <li>{{ w.blend }}</li>
+        <li>{{ w.year }}</li>
+            <li>{{ w.region }}</li>
+        <li>{{ w.appellation }}</li>
+            <li>{{ w.where.room }} | {{ w.where.level }} | {{ w.where.slot }}
+    </ol>
+           
+    
+{% endfor %}
+
+    <a href='/wines/'>Back to all</a>  
+   
+
+
+
+    
+</html>
+    
