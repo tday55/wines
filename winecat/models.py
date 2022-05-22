@@ -4,6 +4,7 @@ from django.db import models
 
 from django.db import models
 from django.utils import timezone
+from datetime import datetime
 
 
 class Maker(models.Model):
@@ -32,4 +33,6 @@ class Wine(models.Model):
     alcohol = models.CharField(max_length=200)
     where = models.ForeignKey(Location, on_delete=models.CASCADE)
     acquired = models.DateTimeField('date acquired')
+    def how_old_is_it(self):
+        return timezone.now().year - int(self.year)
     

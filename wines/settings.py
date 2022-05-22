@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 # Loading from local_settings.py file
 try:
-    from wines.local_settings import *
+    from wines.postgres_settings import *
 except ImportError:
     pass
 
