@@ -44,9 +44,9 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       env:
-        DB: postgres
+        DB: wine
         DB_HOST: 127.0.0.1
         DB_PORT: 5432
-        DB_PASSWORD: postgres
+        DB_PASSWORD: wine
       run: |
         python manage.py test winecat
