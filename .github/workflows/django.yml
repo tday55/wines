@@ -27,7 +27,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        if: github.ref == 'main'
         name: Run Django Tests
         runs-on: ubuntu-latest
         services:
