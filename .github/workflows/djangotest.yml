@@ -36,3 +36,5 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test winecat
+      env:
+        SYSTEM_ENV: GITHUB_WORKFLOW
