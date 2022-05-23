@@ -45,7 +45,7 @@ jobs:
     - name: Run Tests
       env:
         DB: wine
-        DB_HOST: 127.0.0.1
+        DB_HOST: postgres
         DB_PORT: 5432
         DB_PASSWORD: wine
       run: |
