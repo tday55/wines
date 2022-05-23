@@ -1,54 +1,39 @@
-name: Django CI
+name: Run tests
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-20.04
-    strategy:
-      max-parallel: 4
-      matrix:
-        db: [postgres]
-        python-version: [3.10.4]
-        include:
-          - db: postgres
-            db_port: 5432
-
+  test:
+    runs-on: ubuntu-latest
     services:
-      # Label used to access the service container
       postgres:
-        # Docker Hub image
-        image: postgres
-        # Provide the password for postgres
+        image: postgres:12
         env:
-          POSTGRES_PASSWORD: wine
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: wine
+        options:
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         ports:
-          # Maps tcp port 5432 on service container to the host
-          - 5432:5432
+        - 5432:5432
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
+        python-version: 3.8
+    - uses: actions/cache@v2
+      name: Configure pip caching
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Tests
+    - name: Run tests
       env:
-        POSTGRES_HOST: localhost
-        POSTGRES_PORT: 5432
+        DATABASE_URL: postgres://postgres:postgres@127.0.0.1:${{ job.services.postgres.ports['5432'] }}/dbname
       run: |
-        python manage.py test winecat
+        python manage.py runtests winecat
