@@ -9,8 +9,8 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: wine
+          POSTGRES_PASSWORD: wine
           POSTGRES_DB: wine
         options:
           --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -34,6 +34,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run tests
       env:
-        DATABASE_URL: postgres://postgres:postgres@127.0.0.1:${{ job.services.postgres.ports['5432'] }}/dbname
+        DATABASE_URL: postgres://wine:wine@127.0.0.1:${{ job.services.postgres.ports['5432'] }}/wine
       run: |
         python manage.py test winecat
