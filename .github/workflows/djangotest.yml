@@ -36,4 +36,4 @@ jobs:
       env:
         DATABASE_URL: postgres://postgres:postgres@127.0.0.1:${{ job.services.postgres.ports['5432'] }}/dbname
       run: |
-        python manage.py runtests winecat
+        python manage.py test winecat
