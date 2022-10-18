@@ -44,5 +44,5 @@ class Stock(models.Model):
     acquired = models.DateTimeField('date acquired')
     alcohol = models.CharField(max_length=200, default='NA')
     where = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
-    opened = models.DateTimeField('date opened', blank=True)
+    opened = models.DateTimeField('date opened', blank=True, null=True)
     
