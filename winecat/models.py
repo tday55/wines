@@ -36,3 +36,13 @@ class Wine(models.Model):
     def how_old_is_it(self):
         return timezone.now().year - int(self.year)
     
+class Stock(models.Model):
+    def __str__(self):
+        return self.wine.maker.name
+    wine = models.ForeignKey(Wine, on_delete=models.CASCADE)
+    vintage = models.IntegerField('Vintage', default=0)
+    acquired = models.DateTimeField('date acquired')
+    alcohol = models.CharField(max_length=200, default='NA')
+    where = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
+    opened = models.DateTimeField('date opened', blank=True)
+    
