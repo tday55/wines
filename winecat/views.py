@@ -5,13 +5,21 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 
-from .models import Wine
+from .models import Wine, Stock
 
 def index(request):
     latest_wine_list = Wine.objects.order_by('maker__country', 'wine_type', 'blend')
     template = loader.get_template('winecat/index.html')
     context = {
         'latest_wine_list': latest_wine_list,
+    }
+    return HttpResponse(template.render(context, request))
+
+def winelist(request):
+    my_stock = Stock.objects.filter(opened__isnull=True).order_by('wine__maker__country', 'wine__wine_type', 'wine__blend')
+    template = loader.get_template('winecat/winelist.html')
+    context = {
+        'my_stock': my_stock,
     }
     return HttpResponse(template.render(context, request))
 

@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:wine_id>/regions/', views.types, name='region'),
     path('makers/<int:maker_id>/', views.makers, name='onemaker'),
     path('appellation/<str:appellation_in>/', views.appellations, name='oneappellation'),
+    path('wines/', views.winelist, name='winelist'),
 ]
